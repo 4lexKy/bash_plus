@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Copyright 2026 Tu Nombre y colaboradores
+# SPDX-License-Identifier: GPL-2.0-only
+# Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos
+# de la Licencia Pública General GNU como publicada por la Free Software Foundation,
+# ya sea la versión 2 de la Licencia, o (a tu elección) cualquier versión posterior.
+
+#idea de mejora-> un segundo argumento indica donde hacer la busqueda
+#   ej buscar ./ archivo
+
+if (( $# == 1 ));
+then
+    echo -e "\n\tBuscant en /, tardarà uns instants...\n"
+    echo -e "\tvvvv"
+
+    find / -iname $1 2> /dev/null
+
+    echo -e "\t^^^^\n"
+    echo -e "\tRecerca finalitzada, mostrant resultats.\n"
+else
+    echo -e "\n\tBuscar amb: buscar nomArchiuBuscat\n"
+fi
+
+# Bibliografía 20.12.23
+# https://itsfoss.com/es/pasando-argumentos-bash/
+
+# 25.07.2026 Añadido el if para mostrar como llamar

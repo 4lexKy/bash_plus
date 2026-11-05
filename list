@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Copyright 2026 Tu Nombre y colaboradores
+# SPDX-License-Identifier: GPL-2.0-only
+# Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos
+# de la Licencia Pública General GNU como publicada por la Free Software Foundation,
+# ya sea la versión 2 de la Licencia, o (a tu elección) cualquier versión posterior.
+
+# 13.03.2026
+# La idea es que me haga una lista con los archivos, osea mis comandos
+# para saber como se llaman y los que tengo.
+
+echo -e "\n\tMis scripts disponibles: ( ejecuta >lista< para ver permisos)"
+
+#Obtengo ruta
+ruta=$(dirname "$0")
+
+#Cortesía de la ia GPT-OSS:
+ls -p $ruta | grep -v '/$'
+    # Añade una / a los directorios y
+    # filtra eliminanto lineas que contengan un a /
+echo
