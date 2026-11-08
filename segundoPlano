@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Copyright 2026 Tu Nombre y colaboradores
+# SPDX-License-Identifier: GPL-2.0-only
+# Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos
+# de la Licencia Pública General GNU como publicada por la Free Software Foundation,
+# ya sea la versión 2 de la Licencia, o (a tu elección) cualquier versión posterior.
+
+# Alex                 18.04.2024
+# última modificación: 21.05.2024
+
+# Funcionamiento:
+#       Script sencillo que al ponerlo justo delante de cualquier
+#       otro script, tanto con comillas como sin, preferiblemente con,
+#       se ejecuta en segundo plano independiente de la terminal.
+
+#Idea mejora, añadir un -v para que muestre todo por la terminal
+
+nohup $* > /dev/null 2>&1 &

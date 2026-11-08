@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# Copyright 2026 Tu Nombre y colaboradores
+# SPDX-License-Identifier: GPL-2.0-only
+# Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos
+# de la Licencia Pública General GNU como publicada por la Free Software Foundation,
+# ya sea la versión 2 de la Licencia, o (a tu elección) cualquier versión posterior.
+
+#
+#   Alex
+#   17.01.2026
+#
+#La idea es que cuando se haga muy largo el prompt de bash
+#pueda escribir ". corto" y se haga corto.
+#Solamente se mostrarán las carpetas actual y su padre.
+#Será únicamente para la terminal actual de forma temporal.
+#
+#Progreso:
+# - Se ha conseguido hacer el prompt deseado
+# - Se ha conseguido que se actualize cuando se cambia de directorio
+# - Se ha conseguido que no muestre la forma de llamar al cambiar de directorio
+# - Se ha alterado el prompt para los casos ~ y /
+
+
+#Aviso de que se ha de ejecutar en el mismo entorno (mismas variables)
+#Pero no informa cuando se llama de forma automática (actualizar prompt)
+if [[ "$1" != "noEcho" ]]; then
+    echo "Llámame con > . corto < o > source corto < "
+fi
+
+#Almaceno de forma temporal del nuevo prompt
+if [[ "$HOME" == "$PWD" ]]; then
+    #Caso de la carpeta de usuario ( se meuestra solo ~ )
+    PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]>\W\[\033[00m\]\$ "
+elif [[ "$PWD" == "/" ]]; then
+    #Caso carpeta raiz ( no tiene padre )
+    PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]>\W\[\033[00m\]\$ "
+else
+    #Caso común (existe carpeta y su padre)
+    PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]>$(basename "$(dirname "$(pwd)")")/\W\[\033[00m\]\$ "
+
+    #Prompt alternativo igual, que usa la variable "PWD" en vez de llamar al programa $(pwd)
+    # PS1="\[\e]0;\u@\h: \W\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]>$(basename "$(dirname "$PWD")")/\W\[\033[00m\]\$ "
+fi
+
+#Hago que se reejecute este script cuando se cambia de directorio
+PROMPT_COMMAND=". corto 'noEcho'"
+
+# Se han usado:
+#
+# $(algo)
+#   -Se ejecuta "algo" y se devuelve toda la salida como string.
+#
+# dirname "rutaDeLinux"
+#   -Muestra la ruta sin la última carpeta
+#   Ej:  /home/usuario/descargas   >   /home/usuario
+#
+# basename "rutaDeLinux"
+#   -Muestra únicamente la última carpeta de la ruta (la actual)
+#   Ej:  /home/usuario   >   usuario
+#
+
+
+#   USO:
+# usuario@pc:~/directorio/actual/de/la/terminal$ . corto
+# Llámame con > . corto <
+# usuario@pc:>la/terminal$

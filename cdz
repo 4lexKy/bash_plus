@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Copyright 2026 Tu Nombre y colaboradores
+# SPDX-License-Identifier: GPL-2.0-only
+# Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos
+# de la Licencia Pública General GNU como publicada por la Free Software Foundation,
+# ya sea la versión 2 de la Licencia, o (a tu elección) cualquier versión posterior.
+
+# 16.12.2025
+# La idea es volver al directorio anterior en el que estabas.
+
+#Idea de mejora, puede que si llamo al intérprete desde sorce o . directamente mantenga las mismas variables de entorno.
+
+echo "Llámame con > . cdz <"
+cd "$OLDPWD"

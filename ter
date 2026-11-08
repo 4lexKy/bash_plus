@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Copyright 2026 Tu Nombre y colaboradores
+# SPDX-License-Identifier: GPL-2.0-only
+# Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos
+# de la Licencia Pública General GNU como publicada por la Free Software Foundation,
+# ya sea la versión 2 de la Licencia, o (a tu elección) cualquier versión posterior.
+
+#    ter comando
+# ter se lanza junto a un comando para que este se ejecute en una
+# segunda terminal independiente, así se puede navegar para
+# explorar la respuesta, luego cerrarla y no perder el historil mostrado.
+# 05.09.2026 - idea
+# 07.09.2026 - Fet: executa varios comandos, op -s, es tanca al acabar...
+
+
+silenci=0
+nuevo=()
+
+#Gestió de -s per a modi silenci.
+for i in $@; do
+    if [[ "$i" == "-s" ]]; then
+        #Activem el silenci per a que no es mostre res.
+        silenci=1
+        #Eliminen l'argument "-s" per evitar que s'execute.
+    fi
+    #Copio los argumentos excepto la -s
+    [[ "$i" == "-s" ]] || nuevo+=("$i")
+done
+#Pongo los argumentos de nuevo sin "-s"
+set -- "${nuevo[@]}"
+
+# MAIN
+if (($# == 0)); then
+    #No fa res.
+    echo -e "\tSense comandaments que executar..."
+else
+    if gnome-terminal -- sh -c "echo '\n\t>Ejecutando \"$*\" <\n'; (set -x; $* ); echo; echo -n \"Enter per a tancar...\"; bash -c read"; then
+        if ((silenci == 0)); then echo -e "\tObert en terminal independent. Usa -s per silenci."; fi
+    else
+        echo -e "\e[31m\tHa fallat alguna cosa, gnome-terminal acaba amb error >$?<\e[0m"
+    fi
+fi

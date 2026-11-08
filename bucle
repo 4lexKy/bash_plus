@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Copyright 2026 Tu Nombre y colaboradores
+# SPDX-License-Identifier: GPL-2.0-only
+# Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos
+# de la Licencia Pública General GNU como publicada por la Free Software Foundation,
+# ya sea la versión 2 de la Licencia, o (a tu elección) cualquier versión posterior.
+
+# 27.10.2026
+# Un script que me ahorre escribir un bucle infinito en terminal.
+
+#HISTORIAL
+# 27.10.26 - Hecho bucle con traza y salida con CtrlC
+
+#Mejoras
+#-Añadir pausa con las opciones
+#-Añadir repeticiones maximas.
+#- id de iteracion
+
+
+
+trap ctrl_c INT TERM #ERR
+ctrl_c() { #Captura el Ctrl+c i reseteja
+    #Desactiva la traza para la salida
+    set +x
+    echo
+    echo -e "\tEixint."
+    echo
+    exit
+}
+
+while true; do
+    #Activamos la traza localmente
+    ( eval "set -x; $@" )
+    echo
+    sleep 0.1
+done
