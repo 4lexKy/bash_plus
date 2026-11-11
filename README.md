@@ -1,4 +1,4 @@
-[Versión 0.6.2]: #
+[Versión 0.7.2]: #
 # bash_plus - Conjunto de herramientas útiles para el uso ágil de la terminal
 
 Es un conjunto de herramientas, utilidades y wrappers que sirven para ahorrar tiempo en hacer cosas repetitivas como puede ser ejecutar un comando en un bucle infinito, hacer mas corta la ruta de la terminal o ver tu colección de scripts. Dado que son utilidades bastante simples no tienen su propio proyecto.
@@ -8,6 +8,12 @@ Es un conjunto de herramientas, utilidades y wrappers que sirven para ahorrar ti
 - Los scripts existentes funcionan y actualmente estan siendo usados.
 - A muchos de ellos se les pueden mejorar detalles menores.
 - A medida que se necesiten nuevos se iran añadiendo y mejorando.
+
+### Ficheros
+- Scripts*: bucle, buscar, cdz, corto, list, lista, q, saegundoPlano, ter
+- LICENSE: contenido de la licencia
+- README.md: información del proyecto
+- .gitignore: define elementos a ignorar
 
 ---
 ## Instalación
@@ -29,7 +35,9 @@ Para un uso mas ágil se puede crear una carpeta para script de forma que todos 
 
 Esto se puede conseguir añadiendo a ~/.bashrc la línea:
 
->export PATH=$PATH:/ruta/a/carpeta/con/scripts
+```bash
+    export PATH=$PATH:/ruta/a/carpeta/con/scripts
+```
 
 ---
 ## Uso
@@ -106,6 +114,8 @@ Este proyecto está licenciado bajo GPLv2 - consulta el archivo LICENSE para má
 
 ---
 ## Autor
->[Alex](github.com/4lexKy)
+>**Alex**
+- Github: [https://github.com/4lexKy](https://github.com/4lexKy)
+- Email: [alex.correu@pm.me](mailto:alex.correu@pm.me)
 
 ---
