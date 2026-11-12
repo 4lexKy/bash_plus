@@ -9,5 +9,7 @@
 # Es un exit básicamente, solo quiero que me cierre la terminal.
 # Esto es por vaguear, en vez de escribir exit, escribo q de quit.
 # 07.09.2026
+# 12.11.2026 - Ahora se guarda el historial de bash (sighup en vez de sigkill)
 
-kill -SIGKILL $PPID
+# kill -SIGKILL $PPID
+kill -SIGHUP $PPID
