@@ -1,0 +1,110 @@
+#!/bin/bash
+
+# 8.11.2026
+# Idea: modificar los nombres de directorios/ficheros de una carpeta
+# añadiendo un * al final.
+# Útil para ir desmarcando los ficheros comprobados
+
+# 18.11.2026 - Creadas todas las opciones
+#            - Añadido gestión de opciones
+#            - Pruebas realizadas correctamente
+# FINALIZADO
+
+# Configuración de Flags
+accion="t"
+ocultos="n"
+deshacer="n"
+while getopts "hfdorp" opt; do
+    case "$opt" in
+        h)
+            # Informa del uso
+            accion="h"
+            ;;
+        f)
+            # Modifica solo ficheros
+            accion="f"
+            ;;
+        d)
+            # Modifica solo directorios
+            accion="d"
+            ;;
+        t)
+            # Modificar ficheros y directorios (predeterminada)
+            accion="t"
+            ;;
+        o)
+            # Modificar objetos ocultos
+            ocultos="y"
+            ;;
+        r)
+            # Eliminar el '*' en vez de ponerlo
+            deshacer="y"
+            ;;
+        \?) echo "Opción inválida: -$OPTARG" >&2; exit 1 ;;
+        #:) echo "Opción -$OPTARG necesita valor" >&2; exit 1 ;;
+    esac
+done
+
+# Eliminamos las opciones que ha leido getops
+shift $((OPTIND - 1))
+# Valor predeterminado para la ruta
+ruta="${1:-./}"
+
+# Activamos / desactivamos la lectura de los ocultos
+if [[ "$ocultos" == "n" ]]; then
+    shopt -u dotglob #Desactiva
+else
+    #Ocultos - Predeterminado NO los lee.
+    shopt -s dotglob #Activa
+    # Activa/desactiva (-s = set / -u = unset) que * lea archivos ocultos
+fi
+
+case "$accion" in
+    h)
+        echo "Se usa así..."
+        ;;
+    f)
+        #Ficheros
+        if [[ "$deshacer" == "n" ]]; then # Añadimos *
+            for f in "$ruta"/*; do
+                [[ -f "$f" ]] && mv -- "$f" "$f*"
+            done
+        else    # Quitamos *
+            for f in "$ruta"/*'*'; do
+                [[ -f "$f" ]] && mv -- "$f" "${f%\*}"
+            done
+        fi
+        ;;
+    d)
+        #Directorios
+        if [[ "$deshacer" == "n" ]]; then # Añadimos *
+            for d in "$ruta"/*/; do
+                mv -- "$d" "${d%/}*"
+            done
+        else    # Quitamos *
+            for d in "$ruta"/*'*'/; do
+                mv -- "$d" "${d%\*/}"
+            done
+        fi
+
+        ;;
+    t)
+        #Todo
+        if [[ "$deshacer" == "n" ]]; then # Añadimos *
+            for f in "$ruta"/*; do
+                mv -- "$f" "$f*"
+            done
+        else    # Quitamos *
+            for f in "$ruta"/*'*'; do
+                mv -- "$f" "${f%\*}"
+            done
+        fi
+        ;;
+    *)
+        echo "Opción desconocida"
+        exit
+        ;;
+esac
+
+
+

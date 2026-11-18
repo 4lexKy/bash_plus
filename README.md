@@ -1,4 +1,4 @@
-[Versión 0.7.2]: #
+[Versión 0.7.3]: #
 # bash_plus - Conjunto de herramientas útiles para el uso ágil de la terminal
 
 Es un conjunto de herramientas, utilidades y wrappers que sirven para ahorrar tiempo en hacer cosas repetitivas como puede ser ejecutar un comando en un bucle infinito, hacer mas corta la ruta de la terminal o ver tu colección de scripts. Dado que son utilidades bastante simples no tienen su propio proyecto.
@@ -86,6 +86,13 @@ Solo se ha de descargar el/los scripts deseados, darles los permisos correctos y
 ```
 - En caso de hacer uso de la recomentación de este README, se estará usando una carpeta para almacenar los scripts y usarlos desde cualquier directorio y sin añadir "./" delante
 - En caso de usar este método, se muestra la lista de scripts donde está el propio script "lista", mostrando permisos y demás detalles
+### marcaPendientes
+```bash
+
+    ./marcaPendientes [h|f|d|t] [o] [r] [ruta]
+```
+- Marca con '*' carpetas/dorectorios/ambos (ocultos o visibles)
+- Útil para ir eliminando el '*' a medida que se comprueban los elementos
 ### q
 ```bash
 
