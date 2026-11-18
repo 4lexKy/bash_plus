@@ -61,7 +61,15 @@ fi
 
 case "$accion" in
     h)
-        echo "Se usa así..."
+        echo -e "\n\tUso de $0 [h|f|d|t] [o] [r] [ruta]
+\n\tOPCIONES (exclusivas):
+ -f -> Se añade un * al final de los FICHEROS
+ -d -> Se añade un * al final de los DIRECTORIOS
+ -t -> Se añade un * al final de los TODOS los elementos (predeterminado)
+\n\tOPCIONES (independientes):
+ -o -> Se incluyen los elementos ocultos a los tipos anteriores (-t|-d|-f)
+ -r -> Se eliminan los * añadidos a los tipos anteriores (-t|-d|-f)
+\n"
         ;;
     f)
         #Ficheros
